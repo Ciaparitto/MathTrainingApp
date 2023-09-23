@@ -1,0 +1,11 @@
+﻿@model MathTrainingApp.Models.TaskModel
+<p>@Model.description</p>
+@using (Html.BeginForm("Task", "Training", FormMethod.Post))
+{
+	@Html.ValidationSummary();
+	<input type="number" name="UserAnswer" />
+	@Html.HiddenFor(x => x.description)
+	@Html.HiddenFor(x => x.answer);
+	<button type="submit">Potwierdz</button>
+}
+

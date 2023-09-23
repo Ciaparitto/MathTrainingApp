@@ -1,17 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MathTrainingApp.Models;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace MathTrainingApp.Controllers
 {
-    public class Training : Controller
+    public class TrainingController : Controller
     {
-        public IActionResult Index()
+       /*
+		private readonly UserManager<UserModel> _userManager;
+        public TrainingController(UserManager<UserModel> userManager)
+        {
+            _userManager = userManager;
+        }
+		*/
+		public IActionResult Index()
         {
             return View();
         }
+        [HttpGet]
         public IActionResult Task(int SkillLvl) 
         {
+            SkillLvl = 1;
         TaskModel task = null;
         int TaskDifficult;
         int a,b;
@@ -19,7 +28,7 @@ namespace MathTrainingApp.Controllers
         Random random = new Random();
             if (SkillLvl < 18)
             {
-                TaskDifficult = random.Next(SkillLvl);
+                TaskDifficult = random.Next(1, SkillLvl);
             } else
             {
                 int[] Intarray = { 9, 10, 11, 12, 15, 16 };
@@ -118,6 +127,27 @@ namespace MathTrainingApp.Controllers
 
             return View(task);
         }
-        
+        [HttpPost]
+        public IActionResult Task(TaskModel Task, int UserAnswer)
+        {
+            //var USER = _userManager.GetUserAsync(User).Result;
+            
+			if (ModelState.IsValid)
+            {
+                if(Task.answer == UserAnswer)
+                {
+					/*
+                    if(USER != null) 
+                    {
+                        USER.GoodAnswers++;
+                        USER.AllAnswers++;
+                    }
+                    */
+					
+				}
+				return RedirectToAction("Task", "Training");
+			}
+			return RedirectToAction("Task", "Training");
+		}
     }
 }
