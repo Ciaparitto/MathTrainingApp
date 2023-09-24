@@ -1,7 +1,18 @@
+using MathTrainingApp;
+using MathTrainingApp.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<DbContextMath>(builder =>
+{
+	builder.UseSqlServer(@"Data Source=DESKTOP-R5C9EQ0\SQLEXPRESS;Initial Catalog=DbContextMath;Integrated Security=True");
+});
+
+
 
 var app = builder.Build();
 

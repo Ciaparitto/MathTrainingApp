@@ -10,6 +10,6 @@ namespace MathTrainingApp
 		{
 
 		}
-		public DbSet<UserModel> Users;
+		
 	}
 }

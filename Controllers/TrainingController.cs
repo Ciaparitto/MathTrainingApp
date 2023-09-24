@@ -6,13 +6,13 @@ namespace MathTrainingApp.Controllers
 {
     public class TrainingController : Controller
     {
-       /*
+      
 		private readonly UserManager<UserModel> _userManager;
         public TrainingController(UserManager<UserModel> userManager)
         {
             _userManager = userManager;
         }
-		*/
+		
 		public IActionResult Index()
         {
             return View();
@@ -130,23 +130,22 @@ namespace MathTrainingApp.Controllers
         [HttpPost]
         public IActionResult Task(TaskModel Task, int UserAnswer)
         {
-            //var USER = _userManager.GetUserAsync(User).Result;
-            
-			if (ModelState.IsValid)
+            var USER = _userManager.GetUserAsync(User).Result;
+
+            if (ModelState.IsValid)
             {
-                if(Task.answer == UserAnswer)
-                {
-					/*
-                    if(USER != null) 
-                    {
+                if (Task.answer == UserAnswer && USER != null)
+                {  
                         USER.GoodAnswers++;
                         USER.AllAnswers++;
-                    }
-                    */
-					
+                }
+                else
+                {
+					USER.BadAnswers++;
 				}
-				return RedirectToAction("Task", "Training");
-			}
+                return RedirectToAction("Task", "Training");
+            }
+            
 			return RedirectToAction("Task", "Training");
 		}
     }

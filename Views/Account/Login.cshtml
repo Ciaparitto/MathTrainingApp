@@ -1,0 +1,9 @@
+﻿@model MathTrainingApp.Models.Login
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+	<span>podaj nazwe</span>
+	@Html.TextBoxFor(x => x.UserName)
+	<span>podaj haslo</span>
+	@Html.PasswordFor(x => x.Password)
+	<button type="submit">Zajerestuj</button>
+}
