@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MathTrainingApp.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MathTrainingApp.Controllers
 {
@@ -17,6 +18,7 @@ namespace MathTrainingApp.Controllers
         {
             return View();
         }
+        [Authorize]
         [HttpGet]
         public IActionResult Task(int SkillLvl) 
         {

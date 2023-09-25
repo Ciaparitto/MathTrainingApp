@@ -37,7 +37,7 @@ namespace MathTrainingApp.Controllers
 		{
 			return View();
 		}
-		[HttpPost]
+		
 		public async Task<IActionResult> Register(Register UserData)
 		{
 			if (ModelState.IsValid)

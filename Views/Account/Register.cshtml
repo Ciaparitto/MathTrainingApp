@@ -1,6 +1,7 @@
 ﻿@model MathTrainingApp.Models.Register
 @using(Html.BeginForm("register","Account", FormMethod.Post))
 {
+	@Html.ValidationSummary();
 	<span>podaj nazwe</span>
 	@Html.TextBoxFor(x => x.UserName)
 	<span>podaj Email</span>
