@@ -4,9 +4,11 @@ namespace MathTrainingApp.Models
 {
 	public class UserModel : IdentityUser
 	{
-		public int SkillLvl = 1;
-		public int GoodAnswers = 0;
-		public int BadAnswers = 0;
-		public int AllAnswers = 0;
+		public int SkillLvl { get; set; }  = 1;
+		public int GoodAnswers { get; set; } = 0;
+		public int BadAnswers { get; set; } = 0;
+		public int AllAnswers { get; set; } = 0;
+		public int Exp { get; set; } = 0;
+		
 	}
 }

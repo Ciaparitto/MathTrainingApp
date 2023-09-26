@@ -3,26 +3,39 @@ using MathTrainingApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 
+
+
 namespace MathTrainingApp.Controllers
 {
     public class TrainingController : Controller
     {
       
 		private readonly UserManager<UserModel> _userManager;
-        public TrainingController(UserManager<UserModel> userManager)
+        private readonly DbContextMath _context;
+        public TrainingController(UserManager<UserModel> userManager,DbContextMath context)
         {
             _userManager = userManager;
+            _context = context;
         }
 		
 		public IActionResult Index()
         {
             return View();
         }
-        [Authorize]
+        
         [HttpGet]
         public IActionResult Task(int SkillLvl) 
         {
-            SkillLvl = 1;
+        var USER = _userManager.GetUserAsync(User).Result;
+        if(USER != null) 
+            {
+                SkillLvl = USER.SkillLvl;
+            }
+            else
+            {
+                SkillLvl = 0;
+            }
+      
         TaskModel task = null;
         int TaskDifficult;
         int a,b;
@@ -133,18 +146,39 @@ namespace MathTrainingApp.Controllers
         public IActionResult Task(TaskModel Task, int UserAnswer)
         {
             var USER = _userManager.GetUserAsync(User).Result;
+            if (USER.SkillLvl <= 10)
+            {
+                if (USER.Exp >= 10)
+                {
+                    USER.Exp = 0;
+                    USER.SkillLvl++;
+                }
+            }
+            else
+            {
+                if (USER.Exp >= 20)
+                {
+                    USER.Exp = 0;
+                    USER.SkillLvl++;
+                }
 
+            }
+          
             if (ModelState.IsValid)
             {
                 if (Task.answer == UserAnswer && USER != null)
                 {  
                         USER.GoodAnswers++;
                         USER.AllAnswers++;
+                        USER.Exp++;
                 }
                 else
                 {
 					USER.BadAnswers++;
-				}
+                    USER.AllAnswers++;
+                }
+                
+                _context.SaveChanges();
                 return RedirectToAction("Task", "Training");
             }
             

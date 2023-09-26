@@ -4,6 +4,7 @@ using MathTrainingApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MathTrainingApp.Migrations
 {
     [DbContext(typeof(DbContextMath))]
-    partial class DbContextMathModelSnapshot : ModelSnapshot
+    [Migration("20230926140104_UserMigration6")]
+    partial class UserMigration6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,9 +48,6 @@ namespace MathTrainingApp.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<int>("Exp")
-                        .HasColumnType("int");
 
                     b.Property<int>("GoodAnswers")
                         .HasColumnType("int");

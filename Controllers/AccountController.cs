@@ -48,7 +48,8 @@ namespace MathTrainingApp.Controllers
 					UserName = UserData.UserName,
 				};
 				await _userManager.CreateAsync(NewUser, UserData.Password);
-				return RedirectToAction("Index", "Home");
+                await _signInManager.PasswordSignInAsync(UserData.UserName, UserData.Password, false, false);
+                return RedirectToAction("Index", "Home");
 			}
 			return View(User);
 		}
