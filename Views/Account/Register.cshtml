@@ -1,12 +1,51 @@
 ﻿@model MathTrainingApp.Models.Register
+<html>
+<style>
+	* {
+		background-color: rgb(13,77,0);
+		text-align: center;
+	}
+
+	.button {
+		padding: 10px 20px;
+		background-color: rgb(13,120,0);
+		border-radius: 10px;
+		border: none;
+		cursor: pointer;
+		margin-left: 10px;
+	}
+
+	input[type="text"], input[type="password"] {
+		background-color: rgb(13,120,0);
+		border: none;
+		padding: 5px;
+		border-radius:10px;
+	}
+
+	.textarea {
+		padding: 5px 10px;
+	}
+
+	.nav-link {
+		text-decoration: none;
+		background-color: rgb(13,120,0);
+		color: black;
+		padding: 5px 10px;
+		text-size: 10px;
+		border-radius: 10px;
+	}
+</style>
 @using(Html.BeginForm("register","Account", FormMethod.Post))
 {
 	@Html.ValidationSummary();
-	<span>podaj nazwe</span>
+	<a class="nav-link" asp-controller="Home" asp-action="Index">Strona Glowna</a>
+	<p></p>
+	<span >podaj nazwe</span>
 	@Html.TextBoxFor(x => x.UserName)
-	<span>podaj Email</span>
+	<span class="textarea">podaj Email</span>
 	@Html.TextBoxFor(x => x.EmailAddress)
-	<span>podaj haslo</span>
+	<span class="textarea">podaj haslo</span>
 	@Html.PasswordFor(x => x.Password)
-	<button type="submit">Zajerestuj</button>
+	<button type="submit" class="button">Zajerestuj</button>
 }
+</html>

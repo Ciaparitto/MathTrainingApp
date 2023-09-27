@@ -28,7 +28,7 @@ namespace MathTrainingApp.Controllers
 			if (ModelState.IsValid)
 			{
 				await _signInManager.PasswordSignInAsync(UserData.UserName, UserData.Password, false, false);
-				RedirectToAction("Index", "Home");
+				return RedirectToAction("Index", "Home");
 			}
 			return View(UserData);
 		}

@@ -1,17 +1,68 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    
+  
 }
+<html>
+<style>
+    *{
+        background-color: rgb(13,77,0);
+    }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    .text-center{ 
+        text-align:center;
+        font-size:30px;
+        padding-top:50px;
+    }
+    .buttons{
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav-link {
+        color:black;
+        font-size:25px;
+        margin:20px;
+        text-decoration:None;
+        background-color: rgb(13,120,0);
+        padding:5px;
+        border-radius:10px;
+    }
+</style>
+<div class="buttons">
     @if (User.Identity.IsAuthenticated)
     {
+        <a class="nav-link" asp-controller="Account" asp-action="LogOut">wyloguj</a>
+        <a class="nav-link" asp-controller="Training" asp-action="Task">Cwicz</a>
+        
+    }
+    else
+    {
+        <a class="nav-link" asp-controller="Account" asp-action="Login">Zaloguj sie</a>
+        <a class="nav-link" asp-controller="Account" asp-action="Register">Zarejestruj sie</a>
+
+    }
+</div>
+<div class="text-center">
+   
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        float GoodAnswersProcent = 0;
+        if (ViewBag.User.AllAnswers > 0)
+        {
+            GoodAnswersProcent = (((float)ViewBag.User.GoodAnswers / (float)ViewBag.User.AllAnswers) * 100);
+
+        }
         <p>nazwa uzytkowanika: @ViewBag.User.UserName</p>
         <p>dobre odpowiedzi: @ViewBag.User.GoodAnswers</p>
         <p>zle odpowiedzi: @ViewBag.User.BadAnswers</p>
         <p>wyszystkie odpowiedzi: @ViewBag.User.AllAnswers</p>
-        
+        <p>Procent poprawnych Odpowiedzi: @((int)GoodAnswersProcent)%</p>
+    }
+    else
+    {
+        <p>zaloguj sie</p>
     }
 </div>
-
+</html>
