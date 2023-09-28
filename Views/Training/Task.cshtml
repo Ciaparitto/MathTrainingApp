@@ -1,11 +1,58 @@
 ﻿@model MathTrainingApp.Models.TaskModel
-<p>@Model.description</p>
+<html>
+<style>
+	* {
+		background-color: rgb(13,77,0);
+		text-align: center;
+		
+	}
+
+	.button {
+		padding: 10px 20px;
+		background-color: rgb(13,120,0);
+		border-radius: 10px;
+		border: none;
+		cursor: pointer;
+		margin-left: 10px;
+	}
+
+	input[type="number"]{
+		background-color: rgb(13,120,0);
+		border: none;
+		padding: 5px;
+		border-radius: 10px;
+	}
+
+	.numberarea {
+		padding: 5px 10px;
+		font-size: 15px;
+	}
+
+	.paragraph{
+		font-size: 30px;
+	}
+
+	.nav-link {
+		text-decoration: none;
+		background-color: rgb(13,120,0);
+		color: black;
+		padding: 5px 10px;
+		text-size: 10px;
+		border-radius: 10px;
+	}
+	
+</style>
+<a class="nav-link" asp-controller="Home" asp-action="Index">Strona Glowna</a>
+<p></p>
+
+<p class="paragraph">@Model.description</p>
 @using (Html.BeginForm("Task", "Training", FormMethod.Post))
 {
 	@Html.ValidationSummary();
-	<input type="number" name="UserAnswer" />
+	
+	<input type="number" name="UserAnswer" class="numberarea"/>
 	@Html.HiddenFor(x => x.description)
 	@Html.HiddenFor(x => x.answer);
-	<button type="submit">Potwierdz</button>
+	<button type="submit" class="button">Potwierdz</button>
 }
-
+</html>
